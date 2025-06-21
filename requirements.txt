@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+sqlalchemy[asyncio]
+aiosqlite
+aiofiles
+pydantic
+pillow
+pytesseract
+celery[redis]
