@@ -110,9 +110,10 @@ async def process_image_async(doc_id: int):
         loop = asyncio.get_event_loop()
         img = await loop.run_in_executor(None, Image.open, str(filepath))
         text_on_img = await loop.run_in_executor(None, pytesseract.image_to_string, img, "eng")
+        result = text_on_img.replace("\n", "")
 
         await session.execute(
-            update(Documents_text).where(Documents_text.id_doc == doc_id).values(text=text_on_img)
+            update(Documents_text).where(Documents_text.id_doc == doc_id).values(text=result)
         )
         await session.commit()
 
