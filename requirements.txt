@@ -7,3 +7,8 @@ pydantic
 pillow
 pytesseract
 celery[redis]
+dotenv
+asyncpg
+python-multipart
+alembic
+psycopg2-binary

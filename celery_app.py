@@ -12,6 +12,7 @@ app.conf.update(
     enable_utc=True,
 )
 
+
 @app.task(name='tasks.process_image_async')
 def process_image_task(doc_id: int):
     asyncio.run(process_image_async(doc_id))

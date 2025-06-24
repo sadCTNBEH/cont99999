@@ -8,6 +8,7 @@ services:
       - .:/app
     environment:
       - PYTHONPATH=/app
+      - DATABASE_URL=${DATABASE_URL}
     depends_on:
       - redis
 
@@ -19,6 +20,7 @@ services:
       - .:/app
     environment:
       - PYTHONPATH=/app
+      - DATABASE_URL=${DATABASE_URL}
     depends_on:
       - redis
 
@@ -27,3 +29,13 @@ services:
     container_name: redis_server
     ports:
       - "6379:6379"
+
+  db:
+    image: postgres:15-alpine
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1111
+      POSTGRES_DB: fastapi_db
+    ports:
+      - "5432:5432"
