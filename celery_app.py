@@ -15,4 +15,5 @@ app.conf.update(
 
 @app.task(name='tasks.process_image_async')
 def process_image_task(doc_id: int):
-    asyncio.run(process_image_async(doc_id))
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(process_image_async(doc_id))

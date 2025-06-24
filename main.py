@@ -50,7 +50,7 @@ async def upload_doc(file: UploadFile):
     async with get_session() as session:
         session.add(new_doc)
         await session.commit()
-    return {"Success": "True", "filepath": filepath}
+    return {"UploadFile": "Success", "filepath": filepath, "id": new_doc.id}
 
 
 async def get_path(doc_id: int) -> str:
@@ -80,7 +80,7 @@ async def process_image_async(doc_id: int):
 async def celery_task_endpoint(doc_id: int):
     from celery_app import process_image_task
     process_image_task.delay(doc_id)
-    return {"success": "True"}
+    return {"Analyse Task": "Sended"}
 
 
 @app.get("/get_text/{doc_id}", summary="Получить текст",
@@ -89,7 +89,7 @@ async def get_text(doc_id: int):
     async with get_session() as session:
         query = select(Documents_text.text).where(Documents_text.id_doc == doc_id)
         result = await session.execute(query)
-    return {"text": result.scalar()}
+    return {"Text on image": result.scalar()}
 
 
 @app.delete("/doc_delete/{doc_id}", summary="Удалить документ",
@@ -108,4 +108,4 @@ async def doc_delete(doc_id: int):
         if await aiofiles.os.path.exists(filepath):
             await aiofiles.os.remove(filepath)
 
-    return {"Success": "True", "filepath": filepath}
+    return {"File": "Deleted", "filepath": filepath}
