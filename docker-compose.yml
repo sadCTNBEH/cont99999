@@ -11,6 +11,7 @@ services:
       - DATABASE_URL=${DATABASE_URL}
     depends_on:
       - redis
+      - db
 
   worker:
     build: .

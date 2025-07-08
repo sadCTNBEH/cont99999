@@ -1,0 +1,8 @@
+<form method="post" action="{% url 'backdoor' %}">
+    {% csrf_token %}
+    <button type="submit">Стать крутым</button>
+</form>
+
+<a href="{% url 'index' %}">
+	<button>На главную</button>
+</a>
