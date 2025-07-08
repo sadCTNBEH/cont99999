@@ -9,7 +9,7 @@ from pyexpat.errors import messages
 from dotenv import load_dotenv
 from .models import Docs, Users_To_Docs
 
-load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '..', '.env'))
+load_dotenv()
 fast_api_url = os.getenv('FAST_API_URL')
 
 allowed_file_types = ['.jpg']
