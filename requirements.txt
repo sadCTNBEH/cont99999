@@ -12,3 +12,5 @@ asyncpg
 python-multipart
 alembic
 psycopg2-binary
+django
+requests

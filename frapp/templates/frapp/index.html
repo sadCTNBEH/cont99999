@@ -1,0 +1,45 @@
+<!-- templates/frapp/index.html -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <title>Баттонас энд пикчес</title>
+</head>
+<body>
+    <h1>Баттонс</h1>
+
+    <div style="margin-bottom: 20px;">
+        <a href="{% url 'add_image' %}">
+            <button>Аплоад пикче</button>
+        </a>
+        <br>
+        <a href="{% url 'delete_image' %}">
+            <button>Делете пикче</button>
+        </a>
+        <br>
+        <a href="{% url 'analyze' %}">
+            <button>Аналайз пикче</button>
+        </a>
+        <br>
+        <a href="{% url 'info' %}">
+            <button>Получить инфу</button>
+        </a>
+        <br>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Выйти</button>
+        </form>
+    </div>
+
+    <h3>Аплоадед пикчес</h3>
+    <br>
+    <div style="display: flex; flex-wrap: wrap;">
+        {% for doc in documents %}
+            <div style="width: 23%; margin: 1%; text-align: center;">
+                <img src="{{ doc.file_path.url }}" alt="Image {{ doc.id }}" style="width: 100%; height: auto;"/>
+                <p>ID: {{ doc.id }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

@@ -39,3 +39,19 @@ services:
       POSTGRES_DB: fastapi_db
     ports:
       - "5432:5432"
+      
+  django:
+    build: .
+    container_name: django_app
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app
+    environment:
+      - PYTHONPATH=/app
+      - DATABASE_URL=${DATABASE_URL}
+    command: >
+      sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8080"
+    depends_on:
+      - db
+      - web
