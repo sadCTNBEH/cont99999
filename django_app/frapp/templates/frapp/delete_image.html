@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Что?</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Делитинг пикче</h2>
+        <form method="post">
+          {% csrf_token %}
+          <label for="doc_id">Плиз ентер айди оф э пикче:</label>
+          <input type="number" id="doc_id" name="doc_id" required />
+          <button type="submit">Делете</button>
+        </form>
+
+        {% if message %}
+              {{ message }}
+        {% endif %}
+    </div>
+    <div>
+        <a href="{% url 'index' %}">
+            <button>На главную</button>
+        </a>
+    </div>
+</body>
+</html>
